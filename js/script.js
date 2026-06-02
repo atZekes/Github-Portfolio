@@ -25,8 +25,8 @@ if (themeToggle) {
   themeToggle.addEventListener('click', toggleTheme);
 }
 
-// ================= PROJECTS DATA =================
-const PROJECTS = [
+// ================= FALLBACK PROJECTS DATA (kung walang GitHub Issues) =================
+const FALLBACK_PROJECTS = [
   {
     title: "Multi-Branch Booking & Sales System",
     description: "Complete capstone project for Skin911: multi-branch appointment scheduling, sales monitoring, RBAC, and data flow diagrams (Level 0-2).",
@@ -89,44 +89,8 @@ const PROJECTS = [
   }
 ];
 
-// Render projects dynamically
-function renderProjects() {
-  const container = document.getElementById('projectsContainer');
-  if (!container) return;
-  
-  container.innerHTML = PROJECTS.map(project => `
-    <div class="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm card-hover overflow-hidden">
-      <div class="h-44 bg-gradient-to-r ${project.gradient} flex items-center justify-center text-white">
-        <div class="text-center">
-          <svg class="w-12 h-12 mx-auto mb-2 text-indigo-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="${project.icon}" />
-          </svg>
-          <span class="text-xs text-gray-300">${escapeHtml(project.iconLabel)}</span>
-        </div>
-      </div>
-      <div class="p-5">
-        <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">${escapeHtml(project.title)}</h3>
-        <p class="text-gray-600 dark:text-gray-400 text-sm mb-3">${escapeHtml(project.description)}</p>
-        <div class="flex flex-wrap gap-1.5 mb-4">
-          ${project.tech.map(tech => `<span class="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-0.5 rounded-full text-xs">${escapeHtml(tech)}</span>`).join('')}
-        </div>
-        <div class="project-links">
-          ${project.liveLink && project.liveLink !== '#' ? 
-            `<a href="${project.liveLink}" target="_blank" class="live-demo-btn">🚀 Live Demo <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg></a>` :
-            `<a href="#" class="text-indigo-600 dark:text-indigo-400 font-medium hover:underline demo-link">Learn more →</a>`
-          }
-          ${project.githubLink && project.githubLink !== '#' ? 
-            `<a href="${project.githubLink}" target="_blank" class="text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400">GitHub →</a>` :
-            `<a href="#" class="text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 demo-link">GitHub →</a>`
-          }
-        </div>
-      </div>
-    </div>
-  `).join('');
-}
-
-// ================= BLOG POSTS =================
-const BLOG_POSTS = [
+// ================= FALLBACK BLOG POSTS =================
+const FALLBACK_BLOG_POSTS = [
   {
     id: "aws-cloud-practitioner-journey",
     title: "☁️ My AWS Cloud Practitioner Journey: Cloud Quest & SimuLearn",
@@ -164,236 +128,10 @@ const BLOG_POSTS = [
   }
 ];
 
-function renderBlogCards() {
-  const container = document.getElementById('blogContainer');
-  if (!container) return;
-  container.innerHTML = '';
-  BLOG_POSTS.forEach(post => {
-    const card = document.createElement('div');
-    card.className = 'bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 shadow-sm blog-card transition-all cursor-pointer';
-    card.innerHTML = `
-      <div class="flex justify-between items-start mb-2">
-        <h3 class="text-xl font-bold text-gray-900 dark:text-white">${escapeHtml(post.title)}</h3>
-        <span class="text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-full">${post.date}</span>
-      </div>
-      <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">${escapeHtml(post.excerpt)}</p>
-      <div class="flex items-center text-indigo-600 dark:text-indigo-400 text-sm font-medium gap-1">Read full article <span>→</span></div>
-    `;
-    card.addEventListener('click', () => openModalWithPost(post));
-    container.appendChild(card);
-  });
-}
-
-function escapeHtml(str) {
-  return str.replace(/[&<>]/g, function(m) {
-    if (m === '&') return '&amp;';
-    if (m === '<') return '&lt;';
-    if (m === '>') return '&gt;';
-    return m;
-  });
-}
-
-// ================= MODAL FUNCTIONS =================
-const modal = document.getElementById('blogModal');
-const modalTitle = document.getElementById('modalTitle');
-const modalContent = document.getElementById('modalContent');
-const closeModalBtn = document.getElementById('closeModalBtn');
-
-function openModalWithPost(post) {
-  if (modalTitle && modalContent) {
-    modalTitle.innerText = post.title;
-    modalContent.innerHTML = marked.parse(post.markdown);
-    modal.classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
-  }
-}
-
-function closeModal() {
-  if (modal) {
-    modal.classList.add('hidden');
-    document.body.style.overflow = '';
-  }
-}
-
-if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
-if (modal) modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-
-// ================= DRAG-TO-SCROLL FUNCTIONALITY =================
-function setupDragScroll(containerId) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-  
-  let isDown = false;
-  let startX;
-  let scrollLeft;
-  
-  container.addEventListener('mousedown', (e) => {
-    isDown = true;
-    container.style.cursor = 'grabbing';
-    startX = e.pageX - container.offsetLeft;
-    scrollLeft = container.scrollLeft;
-  });
-  
-  container.addEventListener('mouseleave', () => {
-    isDown = false;
-    container.style.cursor = 'grab';
-  });
-  
-  container.addEventListener('mouseup', () => {
-    isDown = false;
-    container.style.cursor = 'grab';
-  });
-  
-  container.addEventListener('mousemove', (e) => {
-    if (!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - container.offsetLeft;
-    const walk = (x - startX) * 1.5;
-    container.scrollLeft = scrollLeft - walk;
-  });
-  
-  container.addEventListener('touchstart', (e) => {
-    isDown = true;
-    startX = e.touches[0].pageX - container.offsetLeft;
-    scrollLeft = container.scrollLeft;
-  });
-  
-  container.addEventListener('touchmove', (e) => {
-    if (!isDown) return;
-    const x = e.touches[0].pageX - container.offsetLeft;
-    const walk = (x - startX) * 1.5;
-    container.scrollLeft = scrollLeft - walk;
-  });
-  
-  container.addEventListener('touchend', () => {
-    isDown = false;
-  });
-  
-  container.style.cursor = 'grab';
-}
-
-// ================= INITIALIZATION =================
-document.addEventListener('DOMContentLoaded', () => {
-  renderProjects();
-  renderBlogCards();
-  
-  setTimeout(() => {
-    setupDragScroll('projectsDragScroll');
-    setupDragScroll('blogDragScroll');
-  }, 300);
-  
-  document.querySelectorAll('.demo-link').forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      alert('🔗 This link can be updated with your actual repository or live demo URL.');
-    });
-  });
-});
-
-
-
-// ================= GITHUB CMS CONFIGURATION =================
-// Palitan ito ng iyong GitHub username at repo name
-const GITHUB_CONFIG = {
-  owner: 'atzekes',        // GitHub username mo
-  repo: 'portfolio',        // Repository name
-  projectsLabel: 'project', // Label para sa projects
-  blogLabel: 'blog'         // Label para sa blog posts
-};
-
-// ================= FETCH DATA FROM GITHUB ISSUES =================
-async function fetchGitHubIssues(label) {
-  const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/issues?labels=${label}&state=all&per_page=50`;
-  
-  try {
-    const response = await fetch(url);
-    if (!response.ok) throw new Error('Failed to fetch');
-    const issues = await response.json();
-    return issues;
-  } catch (error) {
-    console.log('Error fetching issues:', error);
-    return [];
-  }
-}
-
-// ================= CONVERT ISSUE TO PROJECT OBJECT =================
-function issueToProject(issue) {
-  // Extract tech stack from labels (remove 'project' label)
-  const techLabels = issue.labels
-    .map(l => l.name)
-    .filter(name => name !== 'project' && name !== 'featured');
-  
-  // Determine gradient based on tech stack or random
-  const gradients = [
-    'from-slate-700 to-slate-800',
-    'from-cyan-800 to-indigo-700',
-    'from-emerald-600 to-teal-600',
-    'from-indigo-500 to-purple-600',
-    'from-orange-500 to-red-500',
-    'from-blue-600 to-purple-600'
-  ];
-  const gradient = gradients[Math.floor(Math.random() * gradients.length)];
-  
-  // Extract live link and GitHub link from body
-  let liveLink = '#';
-  let githubLink = '#';
-  const liveMatch = issue.body?.match(/LIVE:\s*(https?:\/\/[^\s]+)/i);
-  const githubMatch = issue.body?.match(/GITHUB:\s*(https?:\/\/[^\s]+)/i);
-  if (liveMatch) liveLink = liveMatch[1];
-  if (githubMatch) githubLink = githubMatch[1];
-  
-  // Create excerpt from body (first 150 chars)
-  const cleanBody = issue.body?.replace(/LIVE:.*\n?/i, '').replace(/GITHUB:.*\n?/i, '').trim() || '';
-  const description = cleanBody.substring(0, 200) + (cleanBody.length > 200 ? '...' : '');
-  
-  // Icon based on title
-  const iconMap = {
-    'booking': 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z',
-    'cloud': 'M19.5 10.5c0 1.5-.75 2.25-2.25 2.25h-4.5c-1.5 0-2.25-.75-2.25-2.25V6c0-1.5.75-2.25 2.25-2.25h4.5c1.5 0 2.25.75 2.25 2.25v4.5z',
-    'dashboard': 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
-    'portfolio': 'M4 6h16M4 10h16M4 14h16M4 18h16'
-  };
-  let icon = iconMap['portfolio'];
-  if (issue.title.toLowerCase().includes('booking')) icon = iconMap['booking'];
-  if (issue.title.toLowerCase().includes('cloud')) icon = iconMap['cloud'];
-  if (issue.title.toLowerCase().includes('dashboard')) icon = iconMap['dashboard'];
-  
-  return {
-    title: issue.title,
-    description: description,
-    tech: techLabels.length ? techLabels : ['HTML', 'CSS', 'JS'],
-    gradient: gradient,
-    icon: icon,
-    iconLabel: techLabels.slice(0, 3).join(' • ') || 'Web Development',
-    liveLink: liveLink,
-    githubLink: githubLink,
-    featured: issue.labels.some(l => l.name === 'featured'),
-    created_at: issue.created_at
-  };
-}
-
-// ================= CONVERT ISSUE TO BLOG POST =================
-function issueToBlogPost(issue) {
-  const date = new Date(issue.created_at);
-  const formattedDate = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
-  
-  return {
-    id: issue.number,
-    title: issue.title,
-    excerpt: issue.body?.substring(0, 150).replace(/LIVE:.*\n?/gi, '').replace(/GITHUB:.*\n?/gi, '') + '...' || '',
-    date: formattedDate,
-    markdown: issue.body || '## No content yet\n\nAdd content to this issue using Markdown!'
-  };
-}
-
 // ================= RENDER FUNCTIONS =================
-let currentProjects = [];
-
 function renderProjects(projects) {
   const container = document.getElementById('projectsContainer');
   if (!container) return;
-  
-  currentProjects = projects;
   
   container.innerHTML = projects.map(project => `
     <div class="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm card-hover overflow-hidden">
@@ -482,38 +220,186 @@ function closeModal() {
 if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
 if (modal) modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 
-// ================= LOAD DATA FROM GITHUB =================
+// ================= DRAG-TO-SCROLL FUNCTIONALITY =================
+function setupDragScroll(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+  
+  container.addEventListener('mousedown', (e) => {
+    isDown = true;
+    container.style.cursor = 'grabbing';
+    startX = e.pageX - container.offsetLeft;
+    scrollLeft = container.scrollLeft;
+  });
+  
+  container.addEventListener('mouseleave', () => {
+    isDown = false;
+    container.style.cursor = 'grab';
+  });
+  
+  container.addEventListener('mouseup', () => {
+    isDown = false;
+    container.style.cursor = 'grab';
+  });
+  
+  container.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - container.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    container.scrollLeft = scrollLeft - walk;
+  });
+  
+  container.addEventListener('touchstart', (e) => {
+    isDown = true;
+    startX = e.touches[0].pageX - container.offsetLeft;
+    scrollLeft = container.scrollLeft;
+  });
+  
+  container.addEventListener('touchmove', (e) => {
+    if (!isDown) return;
+    const x = e.touches[0].pageX - container.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    container.scrollLeft = scrollLeft - walk;
+  });
+  
+  container.addEventListener('touchend', () => {
+    isDown = false;
+  });
+  
+  container.style.cursor = 'grab';
+}
+
+// ================= GITHUB CMS INTEGRATION (Optional) =================
+// Gamitin ang GitHub Issues kung gusto mo ng CMS.
+// Para i-enable, gumawa ka ng GitHub Issues na may labels na "project" at "blog"
+
+const GITHUB_CONFIG = {
+  owner: 'atzekes',
+  repo: 'portfolio',
+  projectsLabel: 'project',
+  blogLabel: 'blog'
+};
+
+async function fetchGitHubIssues(label) {
+  const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/issues?labels=${label}&state=all&per_page=50`;
+  
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error('Failed to fetch');
+    const issues = await response.json();
+    return issues;
+  } catch (error) {
+    console.log('Error fetching issues:', error);
+    return [];
+  }
+}
+
+function issueToProject(issue) {
+  const techLabels = issue.labels
+    .map(l => l.name)
+    .filter(name => name !== 'project' && name !== 'featured');
+  
+  const gradients = [
+    'from-slate-700 to-slate-800',
+    'from-cyan-800 to-indigo-700',
+    'from-emerald-600 to-teal-600',
+    'from-indigo-500 to-purple-600',
+    'from-orange-500 to-red-500',
+    'from-blue-600 to-purple-600'
+  ];
+  const gradient = gradients[Math.floor(Math.random() * gradients.length)];
+  
+  let liveLink = '#';
+  let githubLink = '#';
+  const liveMatch = issue.body?.match(/LIVE:\s*(https?:\/\/[^\s]+)/i);
+  const githubMatch = issue.body?.match(/GITHUB:\s*(https?:\/\/[^\s]+)/i);
+  if (liveMatch) liveLink = liveMatch[1];
+  if (githubMatch) githubLink = githubMatch[1];
+  
+  const cleanBody = issue.body?.replace(/LIVE:.*\n?/i, '').replace(/GITHUB:.*\n?/i, '').trim() || '';
+  const description = cleanBody.substring(0, 200) + (cleanBody.length > 200 ? '...' : '');
+  
+  const iconMap = {
+    'booking': 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z',
+    'cloud': 'M19.5 10.5c0 1.5-.75 2.25-2.25 2.25h-4.5c-1.5 0-2.25-.75-2.25-2.25V6c0-1.5.75-2.25 2.25-2.25h4.5c1.5 0 2.25.75 2.25 2.25v4.5z',
+    'dashboard': 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
+    'portfolio': 'M4 6h16M4 10h16M4 14h16M4 18h16'
+  };
+  let icon = iconMap['portfolio'];
+  if (issue.title.toLowerCase().includes('booking')) icon = iconMap['booking'];
+  if (issue.title.toLowerCase().includes('cloud')) icon = iconMap['cloud'];
+  if (issue.title.toLowerCase().includes('dashboard')) icon = iconMap['dashboard'];
+  
+  return {
+    title: issue.title,
+    description: description,
+    tech: techLabels.length ? techLabels : ['HTML', 'CSS', 'JS'],
+    gradient: gradient,
+    icon: icon,
+    iconLabel: techLabels.slice(0, 3).join(' • ') || 'Web Development',
+    liveLink: liveLink,
+    githubLink: githubLink,
+    featured: issue.labels.some(l => l.name === 'featured'),
+    created_at: issue.created_at
+  };
+}
+
+function issueToBlogPost(issue) {
+  const date = new Date(issue.created_at);
+  const formattedDate = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+  
+  return {
+    id: issue.number,
+    title: issue.title,
+    excerpt: issue.body?.substring(0, 150).replace(/LIVE:.*\n?/gi, '').replace(/GITHUB:.*\n?/gi, '') + '...' || '',
+    date: formattedDate,
+    markdown: issue.body || '## No content yet\n\nAdd content to this issue using Markdown!'
+  };
+}
+
+// ================= MAIN LOAD FUNCTION =================
 async function loadAllData() {
-  console.log('Loading data from GitHub...');
+  console.log('Loading data...');
   
-  // Load projects from GitHub Issues with label 'project'
+  // Try to load from GitHub Issues first
   const projectIssues = await fetchGitHubIssues(GITHUB_CONFIG.projectsLabel);
-  const projects = projectIssues.map(issueToProject).filter(p => p.title);
-  renderProjects(projects);
   
-  // Load blog posts from GitHub Issues with label 'blog'
-  const blogIssues = await fetchGitHubIssues(GITHUB_CONFIG.blogLabel);
-  const blogPosts = blogIssues.map(issueToBlogPost);
-  renderBlogCards(blogPosts);
-  
-  console.log(`Loaded ${projects.length} projects and ${blogPosts.length} blog posts`);
+  if (projectIssues.length > 0) {
+    // May laman ang GitHub Issues - gamitin yun
+    console.log(`Using GitHub Issues: ${projectIssues.length} projects found`);
+    const projects = projectIssues.map(issueToProject).filter(p => p.title);
+    renderProjects(projects);
+    
+    const blogIssues = await fetchGitHubIssues(GITHUB_CONFIG.blogLabel);
+    const blogPosts = blogIssues.map(issueToBlogPost);
+    renderBlogCards(blogPosts);
+    console.log(`Loaded ${projects.length} projects and ${blogPosts.length} blog posts from GitHub`);
+  } else {
+    // Walang GitHub Issues - gamitin ang fallback data
+    console.log('No GitHub Issues found. Using fallback data.');
+    renderProjects(FALLBACK_PROJECTS);
+    renderBlogCards(FALLBACK_BLOG_POSTS);
+  }
 }
 
 // ================= INITIALIZATION =================
 document.addEventListener('DOMContentLoaded', () => {
   loadAllData();
   
-  // Setup drag-to-scroll
   setTimeout(() => {
     setupDragScroll('projectsDragScroll');
     setupDragScroll('blogDragScroll');
-  }, 1000);
-});
-
-// Demo links handler
-document.querySelectorAll('.demo-link').forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    alert('🔗 This link can be updated via GitHub Issues!');
+  }, 500);
+  
+  document.querySelectorAll('.demo-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      alert('🔗 This link can be updated via GitHub Issues!');
+    });
   });
 });
