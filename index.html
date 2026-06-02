@@ -10,16 +10,292 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   
-  <!-- External CSS -->
-  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Base styles */
+    * {
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      scroll-behavior: smooth;
+    }
+    
+    /* Theme toggle */
+    .theme-toggle {
+      transition: all 0.3s ease;
+    }
+    .theme-toggle:hover {
+      transform: scale(1.05);
+    }
+    
+    /* Name gradient */
+    .name-gradient {
+      background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 50%, #6b7280 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    body.dark .name-gradient {
+      background: linear-gradient(135deg, #e5e7eb 0%, #9ca3af 50%, #d1d5db 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    /* Subtitle */
+    body.light .subtitle-text { color: #1a1a1a !important; font-weight: 500; }
+    body.dark .subtitle-text { color: #e5e7eb !important; font-weight: 500; }
+    
+    /* Skill badges */
+    body.light .skill-badge {
+      background-color: #ffffff !important;
+      color: #1f2937 !important;
+      border: 1px solid #d1d5db !important;
+    }
+    body.dark .skill-badge {
+      background-color: #334155 !important;
+      color: #e2e8f0 !important;
+      border: 1px solid #475569 !important;
+    }
+    .skill-badge {
+      transition: all 0.2s;
+    }
+    .skill-badge:hover {
+      transform: scale(1.05);
+    }
+    
+    /* Live demo button */
+    .live-demo-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white !important;
+      padding: 0.5rem 1rem;
+      border-radius: 0.75rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    .live-demo-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.3);
+      color: white !important;
+    }
+    body.dark .live-demo-btn {
+      background: linear-gradient(135deg, #059669, #047857);
+    }
+    
+    /* Project links */
+    .project-links {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+    
+    /* Drag-to-Scroll Container - NO VISIBLE SCROLLBAR */
+    .drag-scroll-container {
+      position: relative;
+      overflow-x: auto;
+      overflow-y: visible;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      cursor: grab;
+      user-select: none;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .drag-scroll-container:active {
+      cursor: grabbing;
+    }
+    .drag-scroll-container::-webkit-scrollbar {
+      display: none;
+    }
+    .drag-scroll-content {
+      display: flex;
+      gap: 2rem;
+      padding: 0.5rem 0.25rem;
+      pointer-events: auto;
+    }
+    .drag-scroll-content > * {
+      flex-shrink: 0;
+      width: calc(33.333% - 1.35rem);
+      min-width: 300px;
+      pointer-events: auto;
+    }
+    .blog-drag-scroll-content {
+      display: flex;
+      gap: 2rem;
+      padding: 0.5rem 0.25rem;
+      pointer-events: auto;
+    }
+    .blog-drag-scroll-content > * {
+      flex-shrink: 0;
+      width: calc(33.333% - 1.35rem);
+      min-width: 320px;
+      pointer-events: auto;
+    }
+    
+    @media (max-width: 768px) {
+      .drag-scroll-content > *,
+      .blog-drag-scroll-content > * {
+        width: calc(100% - 1rem);
+        min-width: 280px;
+      }
+    }
+    
+    /* Card styles */
+    .card-hover {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Drag hint */
+    .drag-hint {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #94a3b8;
+      margin-top: 0.75rem;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    body.dark .drag-hint {
+      color: #64748b;
+    }
+    .drag-scroll-container:hover + .drag-hint,
+    .drag-hint:hover {
+      opacity: 1;
+    }
+    
+    /* Blog card */
+    .blog-card {
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .blog-card:hover {
+      border-left: 4px solid #3b82f6;
+    }
+    
+    /* Light mode text colors - LAHAT NG TEXT AY DARK/BLACK */
+    body.light {
+      background-color: #ffffff;
+      color: #111827;
+    }
+    body.light .text-gray-500, 
+    body.light .text-gray-400, 
+    body.light .text-gray-600 { 
+      color: #374151 !important; 
+    }
+    body.light .text-gray-800, 
+    body.light .text-gray-900 { 
+      color: #111827 !important; 
+    }
+    body.light .text-indigo-600 { 
+      color: #4f46e5 !important; 
+    }
+    body.light .bg-white { 
+      background-color: #ffffff !important; 
+    }
+    body.light .border-gray-200 { 
+      border-color: #e5e7eb !important; 
+    }
+    body.light .blog-card { 
+      background-color: #ffffff; 
+      border-color: #e5e7eb; 
+    }
+    body.light .blog-card:hover { 
+      background-color: #f9fafb; 
+    }
+    body.light .markdown-body code { 
+      background-color: #f3f4f6; 
+      color: #1f2937; 
+    }
+    
+    /* Dark mode */
+    body.dark {
+      background-color: #0f172a;
+      color: #f1f5f9;
+    }
+    body.dark .text-gray-500, 
+    body.dark .text-gray-400, 
+    body.dark .text-gray-600 { 
+      color: #cbd5e1 !important; 
+    }
+    body.dark .text-gray-800, 
+    body.dark .text-gray-900 { 
+      color: #f1f5f9 !important; 
+    }
+    body.dark .bg-white { 
+      background-color: #1e293b !important; 
+    }
+    body.dark .border-gray-200 { 
+      border-color: #334155 !important; 
+    }
+    body.dark .blog-card { 
+      background-color: #1e293b; 
+      border-color: #334155; 
+    }
+    body.dark .blog-card:hover { 
+      background-color: #334155; 
+    }
+    body.dark .markdown-body code { 
+      background-color: #334155; 
+      color: #f1f5f9; 
+    }
+    
+    /* Work experience text */
+    body.light .work-title,
+    body.light .work-company,
+    body.light .work-description,
+    body.light .work-list li {
+      color: #1f2937 !important;
+    }
+    body.dark .work-title,
+    body.dark .work-company,
+    body.dark .work-description,
+    body.dark .work-list li {
+      color: #e5e7eb !important;
+    }
+    
+    /* Certifications text */
+    body.light .cert-title,
+    body.light .cert-description {
+      color: #1f2937 !important;
+    }
+    body.dark .cert-title,
+    body.dark .cert-description {
+      color: #e5e7eb !important;
+    }
+    
+    /* Education text */
+    body.light .education-text {
+      color: #1f2937 !important;
+    }
+    body.dark .education-text {
+      color: #e5e7eb !important;
+    }
+    
+    /* Markdown body */
+    .markdown-body p { margin-bottom: 1rem; line-height: 1.6; }
+    .markdown-body h3 { font-size: 1.35rem; font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.5rem; }
+    .markdown-body pre { background: #1e293b; padding: 1rem; border-radius: 0.75rem; overflow-x: auto; margin: 1rem 0; }
+    .markdown-body code { padding: 0.2rem 0.4rem; border-radius: 0.375rem; font-size: 0.9rem; }
+    .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  </style>
 </head>
 <body>
-  <!-- Dark mode initialization - prevents flash -->
+  <!-- Dark mode initialization -->
   <script>
     (function() {
       const savedTheme = localStorage.getItem('theme');
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      
       if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
         document.body.classList.add('dark');
         document.body.classList.remove('light');
@@ -30,10 +306,11 @@
     })();
   </script>
 
-  <!-- ================= HERO SECTION ================= -->
-  <section class="relative overflow-hidden bg-gradient-to-br from-indigo-50 via-white to-cyan-50 transition-colors duration-300">
-    <div class="absolute top-0 right-0 w-72 h-72 bg-indigo-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 -z-10"></div>
-    <div class="absolute bottom-0 left-0 w-72 h-72 bg-cyan-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 -z-10"></div>
+  
+    <!-- ================= HERO SECTION ================= -->
+  <section class="hero-section relative overflow-hidden transition-colors duration-300">
+    <div class="hero-blob-top absolute top-0 right-0 w-72 h-72 bg-indigo-200 rounded-full mix-blend-multiply filter blur-3xl -z-10"></div>
+    <div class="hero-blob-bottom absolute bottom-0 left-0 w-72 h-72 bg-cyan-200 rounded-full mix-blend-multiply filter blur-3xl -z-10"></div>
     
     <div class="max-w-6xl mx-auto px-6 py-20 md:py-28 lg:py-32">
       <div class="flex flex-col items-center text-center space-y-6">
@@ -57,14 +334,9 @@
           Open to cloud opportunities
         </div>
         
-        <!-- NAME WITH BLACK TO GRAY GRADIENT -->
-        <h1 class="name-gradient text-5xl md:text-7xl font-extrabold tracking-tight">
-          Leo Genodiala
-        </h1>
+        <h1 class="name-gradient text-5xl md:text-7xl font-extrabold tracking-tight">Leo Genodiala</h1>
         
-        <p class="subtitle-text text-xl md:text-2xl max-w-2xl">
-           Cloud Practitioner in progress | Full-Stack Web Developer (Laravel, PHP, MySQL)
-        </p>
+        <p class="subtitle-text text-xl md:text-2xl max-w-2xl">Cloud Practitioner in progress | Full-Stack Web Developer (Laravel, PHP, MySQL)</p>
         
         <div class="flex flex-wrap justify-center gap-4 pt-4">
           <a href="#projects" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl shadow-md transition-all hover:shadow-lg">View Projects</a>
@@ -90,42 +362,48 @@
       <p class="text-gray-600 dark:text-gray-400 mt-2">Cloud + Full-stack expertise | Programming languages & tools</p>
     </div>
     <div class="flex flex-wrap justify-center gap-2.5">
-      <span class="skill-badge bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-full text-sm font-medium cursor-default">☕ Java</span>
-      <span class="skill-badge bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-full text-sm font-medium cursor-default">🐍 Python</span>
-      <span class="skill-badge bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-full text-sm font-medium cursor-default">🐘 PHP</span>
-      <span class="skill-badge bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-full text-sm font-medium cursor-default">📜 JavaScript (ES6)</span>
-      <span class="skill-badge bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-full text-sm font-medium cursor-default">🎨 CSS3 / Tailwind</span>
-      <span class="skill-badge bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-full text-sm font-medium cursor-default">🌐 HTML5</span>
-      <span class="skill-badge bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-full text-sm font-medium cursor-default">🐬 MySQL</span>
-      <span class="skill-badge bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-full text-sm font-medium cursor-default">⚡ Laravel</span>
-      <span class="skill-badge bg-indigo-50 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 px-4 py-2 rounded-full text-sm font-medium cursor-default">☁️ AWS (EC2, Lambda, S3, CLI)</span>
-      <span class="skill-badge bg-indigo-50 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 px-4 py-2 rounded-full text-sm font-medium cursor-default">📡 TCP/IP & Cisco Basics</span>
-      <span class="skill-badge bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-full text-sm font-medium cursor-default">🐙 Git & GitHub</span>
-      <span class="skill-badge bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-full text-sm font-medium cursor-default">🤖 AI-assisted dev</span>
+      <span class="skill-badge px-4 py-2 rounded-full text-sm font-medium cursor-default">☕ Java</span>
+      <span class="skill-badge px-4 py-2 rounded-full text-sm font-medium cursor-default">🐍 Python</span>
+      <span class="skill-badge px-4 py-2 rounded-full text-sm font-medium cursor-default">🐘 PHP</span>
+      <span class="skill-badge px-4 py-2 rounded-full text-sm font-medium cursor-default">📜 JavaScript (ES6)</span>
+      <span class="skill-badge px-4 py-2 rounded-full text-sm font-medium cursor-default">🎨 CSS3 / Tailwind</span>
+      <span class="skill-badge px-4 py-2 rounded-full text-sm font-medium cursor-default">🌐 HTML5</span>
+      <span class="skill-badge px-4 py-2 rounded-full text-sm font-medium cursor-default">🐬 MySQL</span>
+      <span class="skill-badge px-4 py-2 rounded-full text-sm font-medium cursor-default">⚡ Laravel</span>
+      <span class="skill-badge px-4 py-2 rounded-full text-sm font-medium cursor-default">☁️ AWS (EC2, Lambda, S3, CLI)</span>
+      <span class="skill-badge px-4 py-2 rounded-full text-sm font-medium cursor-default">📡 TCP/IP & Cisco Basics</span>
+      <span class="skill-badge px-4 py-2 rounded-full text-sm font-medium cursor-default">🐙 Git & GitHub</span>
+      <span class="skill-badge px-4 py-2 rounded-full text-sm font-medium cursor-default">🤖 AI-assisted dev</span>
     </div>
   </section>
 
-  <!-- ================= PROJECT CARDS ================= -->
+  <!-- ================= PROJECT CARDS (Drag to Scroll) ================= -->
   <section id="projects" class="max-w-6xl mx-auto px-6 py-16">
-    <div class="text-center mb-14">
+    <div class="text-center mb-8">
       <span class="text-indigo-600 dark:text-indigo-400 font-semibold tracking-wide uppercase text-sm">Real-world work</span>
       <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4 text-gray-900 dark:text-white">Projects that demonstrate full-stack & cloud skills</h2>
       <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">From Laravel booking systems to cloud experimentation — each project reflects my hands-on approach.</p>
     </div>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsContainer">
-      <!-- Projects will be populated by JavaScript -->
+    
+    <div class="drag-scroll-container" id="projectsDragScroll">
+      <div class="drag-scroll-content" id="projectsContainer"></div>
     </div>
+    <div class="drag-hint">🖱️ Click and drag horizontally to see more projects →</div>
   </section>
 
   <!-- ================= BLOG SECTION ================= -->
   <section class="bg-gray-50 dark:bg-gray-900 py-20 transition-colors duration-300">
     <div class="max-w-6xl mx-auto px-6">
-      <div class="text-center mb-12">
+      <div class="text-center mb-8">
         <span class="text-indigo-600 dark:text-indigo-400 font-semibold tracking-wide uppercase text-sm">cloud & dev notes</span>
         <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4 text-gray-900 dark:text-white">From the Learning Journey</h2>
         <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Markdown-powered blog posts about AWS, Laravel, and developer insights — all static, no database.</p>
       </div>
-      <div id="blogContainer" class="grid md:grid-cols-2 gap-8"></div>
+      
+      <div class="drag-scroll-container" id="blogDragScroll">
+        <div class="blog-drag-scroll-content" id="blogContainer"></div>
+      </div>
+      <div class="drag-hint">🖱️ Click and drag horizontally to see more articles →</div>
     </div>
     
     <!-- Modal -->
@@ -135,50 +413,50 @@
           <h3 id="modalTitle" class="text-2xl font-bold text-gray-900 dark:text-white">Blog Post</h3>
           <button id="closeModalBtn" class="text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 text-2xl leading-5">&times;</button>
         </div>
-        <div id="modalContent" class="p-6 markdown-body text-gray-800 dark:text-gray-300"></div>
+        <div id="modalContent" class="p-6 markdown-body"></div>
       </div>
     </div>
   </section>
 
   <!-- ================= EXPERIENCE & CERTIFICATIONS ================= -->
-<section class="max-w-6xl mx-auto px-6 py-16">
-  <div class="grid md:grid-cols-2 gap-12">
-    <div>
-      <h3 class="text-2xl font-bold mb-5 flex items-center gap-2 text-gray-900 dark:text-white">💼 Work Experience</h3>
-      <div class="space-y-6">
-        <div class="border-l-4 border-indigo-400 pl-4">
-          <h4 class="work-title font-bold text-lg text-gray-900 dark:text-white">Web Application Developer (Capstone Lead)</h4>
-          <p class="work-company text-sm text-indigo-600 dark:text-indigo-400">Skin911 · Sep 2025 – Dec 2025</p>
-          <ul class="work-list list-disc list-inside text-gray-700 dark:text-gray-400 text-sm mt-2 space-y-1">
-            <li class="work-description">Built multi-branch booking + sales monitoring system using PHP/Laravel & MySQL.</li>
-            <li class="work-description">Implemented RBAC, authentication, and full data flow diagrams (Level 0-2).</li>
-            <li class="work-description">Leveraged AI-assisted tools for debugging and documentation.</li>
-          </ul>
+  <section class="max-w-6xl mx-auto px-6 py-16">
+    <div class="grid md:grid-cols-2 gap-12">
+      <div>
+        <h3 class="text-2xl font-bold mb-5 flex items-center gap-2 text-gray-900 dark:text-white">💼 Work Experience</h3>
+        <div class="space-y-6">
+          <div class="border-l-4 border-indigo-400 pl-4">
+            <h4 class="work-title font-bold text-lg">Web Application Developer (Capstone Lead)</h4>
+            <p class="work-company text-sm text-indigo-600 dark:text-indigo-400">Skin911 · Sep 2025 – Dec 2025</p>
+            <ul class="work-list list-disc list-inside text-sm mt-2 space-y-1">
+              <li class="work-description">Built multi-branch booking + sales monitoring system using PHP/Laravel & MySQL.</li>
+              <li class="work-description">Implemented RBAC, authentication, and full data flow diagrams (Level 0-2).</li>
+              <li class="work-description">Leveraged AI-assisted tools for debugging and documentation.</li>
+            </ul>
+          </div>
+          <div class="border-l-4 border-gray-300 dark:border-gray-700 pl-4">
+            <h4 class="work-title font-bold text-lg">Salesperson</h4>
+            <p class="work-company text-sm text-gray-500 dark:text-gray-500">Aurefine · Mar 2025 – May 2025</p>
+            <ul class="work-list list-disc list-inside text-sm mt-2">
+              <li class="work-description">Developed client-facing communication, needs assessment, and objection handling — skills that enhance technical collaboration.</li>
+            </ul>
+          </div>
         </div>
-        <div class="border-l-4 border-gray-300 dark:border-gray-700 pl-4">
-          <h4 class="work-title font-bold text-lg text-gray-900 dark:text-white">Salesperson</h4>
-          <p class="work-company text-sm text-gray-500 dark:text-gray-500">Aurefine · Mar 2025 – May 2025</p>
-          <ul class="work-list list-disc list-inside text-gray-700 dark:text-gray-400 text-sm mt-2">
-            <li class="work-description">Developed client-facing communication, needs assessment, and objection handling — skills that enhance technical collaboration.</li>
-          </ul>
+      </div>
+      <div>
+        <h3 class="text-2xl font-bold mb-5 flex items-center gap-2 text-gray-900 dark:text-white">🎓 Certifications & Training</h3>
+        <div class="space-y-3 bg-gray-50 dark:bg-gray-800/50 p-5 rounded-2xl border border-gray-100 dark:border-gray-700">
+          <div class="flex items-start gap-3"><span class="text-indigo-600 dark:text-indigo-400 text-xl">✓</span><div><span class="cert-title font-semibold">AWS Cloud Quest: Cloud Practitioner</span><p class="cert-description text-sm">AWS Skill Builder — hands-on scenarios</p></div></div>
+          <div class="flex items-start gap-3"><span class="text-indigo-600 dark:text-indigo-400 text-xl">✓</span><div><span class="cert-title font-semibold">SimuLearn AWS Training</span><p class="cert-description text-sm">Simulations & cloud architecture basics</p></div></div>
+          <div class="flex items-start gap-3"><span class="text-indigo-600 dark:text-indigo-400 text-xl">✓</span><div><span class="cert-title font-semibold">Cisco Networking Basics</span><p class="cert-description text-sm">TCP/IP, subnetting, network fundamentals</p></div></div>
+          <div class="flex items-start gap-3"><span class="text-indigo-600 dark:text-indigo-400 text-xl">🎯</span><div><span class="cert-title font-semibold">Working toward AWS Cloud Practitioner</span><p class="cert-description text-sm">Deepening cloud infrastructure & security</p></div></div>
+        </div>
+        <div class="mt-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-5 rounded-2xl">
+          <h4 class="font-bold text-gray-900 dark:text-white">🎓 Education</h4>
+          <p class="education-text">BS Information Technology, STI College Bacoor (2022–2026)</p>
         </div>
       </div>
     </div>
-    <div>
-      <h3 class="text-2xl font-bold mb-5 flex items-center gap-2 text-gray-900 dark:text-white">🎓 Certifications & Training</h3>
-      <div class="space-y-3 bg-gray-50 dark:bg-gray-800/50 p-5 rounded-2xl border border-gray-100 dark:border-gray-700">
-        <div class="flex items-start gap-3"><span class="text-indigo-600 dark:text-indigo-400 text-xl">✓</span><div><span class="cert-title font-semibold text-gray-900 dark:text-white">AWS Cloud Quest: Cloud Practitioner</span><p class="cert-description text-sm text-gray-600 dark:text-gray-400">AWS Skill Builder — hands-on scenarios</p></div></div>
-        <div class="flex items-start gap-3"><span class="text-indigo-600 dark:text-indigo-400 text-xl">✓</span><div><span class="cert-title font-semibold text-gray-900 dark:text-white">SimuLearn AWS Training</span><p class="cert-description text-sm text-gray-600 dark:text-gray-400">Simulations & cloud architecture basics</p></div></div>
-        <div class="flex items-start gap-3"><span class="text-indigo-600 dark:text-indigo-400 text-xl">✓</span><div><span class="cert-title font-semibold text-gray-900 dark:text-white">Cisco Networking Basics</span><p class="cert-description text-sm text-gray-600 dark:text-gray-400">TCP/IP, subnetting, network fundamentals</p></div></div>
-        <div class="flex items-start gap-3"><span class="text-indigo-600 dark:text-indigo-400 text-xl">🎯</span><div><span class="cert-title font-semibold text-gray-900 dark:text-white">Working toward AWS Cloud Practitioner</span><p class="cert-description text-sm text-gray-600 dark:text-gray-400">Deepening cloud infrastructure & security</p></div></div>
-      </div>
-      <div class="mt-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-5 rounded-2xl">
-        <h4 class="font-bold text-gray-900 dark:text-white">🎓 Education</h4>
-        <p class="education-text text-gray-700 dark:text-gray-300">BS Information Technology, STI College Bacoor (2022–2026)</p>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
   <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-8 transition-colors duration-300">
     <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-gray-600 dark:text-gray-400 text-sm">
@@ -191,7 +469,6 @@
     </div>
   </footer>
 
-  <!-- External JavaScript -->
   <script src="js/script.js"></script>
 </body>
 </html>

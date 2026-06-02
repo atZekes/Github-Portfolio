@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio CMS | Leo Genodiala</title>
+  <!-- Decap CMS CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.css" />
+</head>
+<body>
+  <!-- Decap CMS Script -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  
+  <script>
+    // Initialize Decap CMS with custom preview styles
+    CMS.init({
+      config: {
+        backend: {
+          name: 'git-gateway',
+          branch: 'main',
+        },
+        media_folder: 'assets/uploads',
+        public_folder: '/assets/uploads',
+        collections: [
+          {
+            name: 'projects',
+            label: 'Projects',
+            folder: '_data/projects',
+            create: true,
+            slug: '{{slug}}',
+            fields: [
+              { label: 'Title', name: 'title', widget: 'string' },
+              { label: 'Description', name: 'description', widget: 'text' },
+              { label: 'Tech Stack', name: 'tech', widget: 'list', default: ['PHP', 'MySQL'] },
+              { label: 'Gradient Color', name: 'gradient', widget: 'string', default: 'from-slate-700 to-slate-800' },
+              { label: 'Icon SVG Path', name: 'icon', widget: 'text' },
+              { label: 'Icon Label', name: 'iconLabel', widget: 'string' },
+              { label: 'Live Demo URL', name: 'liveLink', widget: 'string', required: false },
+              { label: 'GitHub URL', name: 'githubLink', widget: 'string', required: false },
+              { label: 'Featured', name: 'featured', widget: 'boolean', default: false }
+            ]
+          },
+          {
+            name: 'blog',
+            label: 'Blog Posts',
+            folder: '_posts',
+            create: true,
+            slug: '{{year}}-{{month}}-{{day}}-{{slug}}',
+            fields: [
+              { label: 'Title', name: 'title', widget: 'string' },
+              { label: 'Publish Date', name: 'date', widget: 'datetime' },
+              { label: 'Excerpt', name: 'excerpt', widget: 'text' },
+              { label: 'Body', name: 'body', widget: 'markdown' },
+              { label: 'Featured Image', name: 'image', widget: 'image', required: false }
+            ]
+          },
+          {
+            name: 'settings',
+            label: 'Settings',
+            files: [
+              {
+                name: 'general',
+                label: 'General Settings',
+                file: '_data/settings.json',
+                fields: [
+                  { label: 'Site Title', name: 'site_title', widget: 'string' },
+                  { label: 'Hero Title', name: 'hero_title', widget: 'string' },
+                  { label: 'Hero Subtitle', name: 'hero_subtitle', widget: 'string' },
+                  { label: 'Email', name: 'email', widget: 'string' },
+                  { label: 'Location', name: 'location', widget: 'string' },
+                  { label: 'LinkedIn URL', name: 'linkedin_url', widget: 'string' },
+                  { label: 'GitHub URL', name: 'github_url', widget: 'string' }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    });
+  </script>
+</body>
+</html>

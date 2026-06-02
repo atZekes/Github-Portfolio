@@ -408,3 +408,124 @@ body.dark footer a {
 body.dark footer a:hover {
   color: #818cf8 !important;
 }
+
+/* ================= HERO SECTION BACKGROUND ================= */
+/* Light mode - bright gradient */
+body.light .hero-section {
+  background: linear-gradient(135deg, #eef2ff 0%, #ffffff 50%, #ecfeff 100%) !important;
+}
+
+/* Dark mode - dark gradient */
+body.dark .hero-section {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%) !important;
+}
+
+/* Hero blob decorations - adjust opacity for dark mode */
+body.light .hero-blob-top,
+body.light .hero-blob-bottom {
+  opacity: 0.2;
+}
+
+body.dark .hero-blob-top,
+body.dark .hero-blob-bottom {
+  opacity: 0.1;
+}
+
+/* ================= BLOG SECTION TEXT STYLES ================= */
+/* Light mode - black/dark text */
+body.light .blog-section .section-label,
+body.light .blog-section .section-title-large,
+body.light .blog-section .section-subtitle {
+  color: #1f2937 !important;
+}
+
+body.light .blog-section .section-label {
+  color: #4f46e5 !important;
+}
+
+/* Dark mode - white/light text */
+body.dark .blog-section .section-label,
+body.dark .blog-section .section-title-large,
+body.dark .blog-section .section-subtitle {
+  color: #f1f5f9 !important;
+}
+
+body.dark .blog-section .section-label {
+  color: #818cf8 !important;
+}
+
+/* ================= BLOG CARD TEXT STYLES - ensure visibility ================= */
+/* Light mode - blog cards text dark */
+body.light .blog-card .blog-title,
+body.light .blog-card .blog-excerpt,
+body.light .blog-card .blog-date {
+  color: #1f2937 !important;
+}
+
+body.light .blog-card .blog-date {
+  color: #6b7280 !important;
+  background-color: #f3f4f6 !important;
+}
+
+/* Dark mode - blog cards text light */
+body.dark .blog-card .blog-title,
+body.dark .blog-card .blog-excerpt,
+body.dark .blog-card .blog-date {
+  color: #e5e7eb !important;
+}
+
+body.dark .blog-card .blog-date {
+  color: #94a3b8 !important;
+  background-color: #334155 !important;
+}
+
+/* ================= BLOG SECTION TITLE & DESCRIPTION ================= */
+/* "From the Learning Journey" title - Light mode */
+body.light .blog-title-main {
+  color: #111827 !important;
+}
+
+/* "From the Learning Journey" title - Dark mode */
+body.dark .blog-title-main {
+  color: #f1f5f9 !important;
+}
+
+/* Description text below title - Light mode */
+body.light .blog-description {
+  color: #374151 !important;
+}
+
+/* Description text below title - Dark mode */
+body.dark .blog-description {
+  color: #cbd5e1 !important;
+}
+/* ================= BLOG SECTION TITLE & DESCRIPTION ================= */
+/* "From the Learning Journey" title */
+.blog-title-main {
+  transition: color 0.2s ease;
+}
+
+/* Light mode - black title */
+body.light .blog-title-main {
+  color: #111827 !important;
+}
+
+/* Dark mode - white title */
+body.dark .blog-title-main {
+  color: #f1f5f9 !important;
+}
+
+/* Description text */
+.blog-description {
+  transition: color 0.2s ease;
+}
+
+/* Light mode - dark gray description */
+body.light .blog-description {
+  color: #374151 !important;
+}
+
+/* Dark mode - light gray description */
+body.dark .blog-description {
+  color: #cbd5e1 !important;
+}
