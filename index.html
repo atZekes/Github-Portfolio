@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Leo Genodiala | Cloud & Web Developer Portfolio</title>
+  
+  <!-- Google Fonts + Tailwind CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  
+  <!-- External CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Dark mode initialization - prevents flash -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        document.body.classList.add('dark');
+        document.body.classList.remove('light');
+      } else {
+        document.body.classList.add('light');
+        document.body.classList.remove('dark');
+      }
+    })();
+  </script>
+
+  <!-- ================= HERO SECTION ================= -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-indigo-50 via-white to-cyan-50 transition-colors duration-300">
+    <div class="absolute top-0 right-0 w-72 h-72 bg-indigo-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 -z-10"></div>
+    <div class="absolute bottom-0 left-0 w-72 h-72 bg-cyan-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 -z-10"></div>
+    
+    <div class="max-w-6xl mx-auto px-6 py-20 md:py-28 lg:py-32">
+      <div class="flex flex-col items-center text-center space-y-6">
+        <!-- Dark Mode Toggle Button -->
+        <div class="absolute top-6 right-6 md:top-8 md:right-8">
+          <button id="themeToggle" class="theme-toggle p-2.5 rounded-full bg-white/90 dark:bg-gray-800/90 shadow-md border border-gray-200 dark:border-gray-700 hover:shadow-lg backdrop-blur-sm transition-all">
+            <svg id="lightIcon" class="w-5 h-5 text-yellow-500 hidden dark:block" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"/>
+            </svg>
+            <svg id="darkIcon" class="w-5 h-5 text-gray-700 dark:text-gray-300 block dark:hidden" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="inline-flex items-center gap-2 bg-indigo-100 dark:bg-indigo-900/80 text-indigo-800 dark:text-indigo-200 px-4 py-1.5 rounded-full text-sm font-medium shadow-sm">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-600 dark:bg-indigo-400"></span>
+          </span>
+          Open to cloud opportunities
+        </div>
+        
+        <!-- NAME WITH BLACK TO GRAY GRADIENT -->
+        <h1 class="name-gradient text-5xl md:text-7xl font-extrabold tracking-tight">
+          Leo Genodiala
+        </h1>
+        
+        <p class="subtitle-text text-xl md:text-2xl max-w-2xl">
+           Cloud Practitioner in progress | Full-Stack Web Developer (Laravel, PHP, MySQL)
+        </p>
+        
+        <div class="flex flex-wrap justify-center gap-4 pt-4">
+          <a href="#projects" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl shadow-md transition-all hover:shadow-lg">View Projects</a>
+          <a href="Leo_Genodiala_Resume.pdf" download class="px-6 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-200 font-semibold rounded-xl shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-all flex items-center gap-2">
+            📄 Download Resume (PDF)
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m-6-4V4a2 2 0 012-2h4a2 2 0 012 2v4M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"></path></svg>
+          </a>
+        </div>
+        
+        <div class="flex flex-wrap justify-center gap-3 pt-2 text-sm text-gray-600 dark:text-gray-400">
+          <span class="flex items-center gap-1">📧 leogenodiala@gmail.com</span>
+          <span class="flex items-center gap-1">📍 Bacoor, Calabarzon, PH</span>
+          <a href="https://www.linkedin.com/in/leogenodiala/" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1">🔗 LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SKILLS SECTION ========== -->
+  <section class="max-w-6xl mx-auto px-6 py-12 border-b border-gray-200 dark:border-gray-800">
+    <div class="text-center mb-8">
+      <h2 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">⚙️ Technical Arsenal</h2>
+      <p class="text-gray-600 dark:text-gray-400 mt-2">Cloud + Full-stack expertise | Programming languages & tools</p>
+    </div>
+    <div class="flex flex-wrap justify-center gap-2.5">
+      <span class="skill-badge bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-full text-sm font-medium cursor-default">☕ Java</span>
+      <span class="skill-badge bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-full text-sm font-medium cursor-default">🐍 Python</span>
+      <span class="skill-badge bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-full text-sm font-medium cursor-default">🐘 PHP</span>
+      <span class="skill-badge bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-full text-sm font-medium cursor-default">📜 JavaScript (ES6)</span>
+      <span class="skill-badge bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-full text-sm font-medium cursor-default">🎨 CSS3 / Tailwind</span>
+      <span class="skill-badge bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-full text-sm font-medium cursor-default">🌐 HTML5</span>
+      <span class="skill-badge bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-full text-sm font-medium cursor-default">🐬 MySQL</span>
+      <span class="skill-badge bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-full text-sm font-medium cursor-default">⚡ Laravel</span>
+      <span class="skill-badge bg-indigo-50 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 px-4 py-2 rounded-full text-sm font-medium cursor-default">☁️ AWS (EC2, Lambda, S3, CLI)</span>
+      <span class="skill-badge bg-indigo-50 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 px-4 py-2 rounded-full text-sm font-medium cursor-default">📡 TCP/IP & Cisco Basics</span>
+      <span class="skill-badge bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-full text-sm font-medium cursor-default">🐙 Git & GitHub</span>
+      <span class="skill-badge bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-full text-sm font-medium cursor-default">🤖 AI-assisted dev</span>
+    </div>
+  </section>
+
+  <!-- ================= PROJECT CARDS ================= -->
+  <section id="projects" class="max-w-6xl mx-auto px-6 py-16">
+    <div class="text-center mb-14">
+      <span class="text-indigo-600 dark:text-indigo-400 font-semibold tracking-wide uppercase text-sm">Real-world work</span>
+      <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4 text-gray-900 dark:text-white">Projects that demonstrate full-stack & cloud skills</h2>
+      <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">From Laravel booking systems to cloud experimentation — each project reflects my hands-on approach.</p>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsContainer">
+      <!-- Projects will be populated by JavaScript -->
+    </div>
+  </section>
+
+  <!-- ================= BLOG SECTION ================= -->
+  <section class="bg-gray-50 dark:bg-gray-900 py-20 transition-colors duration-300">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <span class="text-indigo-600 dark:text-indigo-400 font-semibold tracking-wide uppercase text-sm">cloud & dev notes</span>
+        <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4 text-gray-900 dark:text-white">From the Learning Journey</h2>
+        <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Markdown-powered blog posts about AWS, Laravel, and developer insights — all static, no database.</p>
+      </div>
+      <div id="blogContainer" class="grid md:grid-cols-2 gap-8"></div>
+    </div>
+    
+    <!-- Modal -->
+    <div id="blogModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 hidden transition-all duration-300">
+      <div class="bg-white dark:bg-gray-800 max-w-3xl w-full mx-4 rounded-2xl shadow-2xl max-h-[85vh] overflow-y-auto">
+        <div class="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-6 py-4 flex justify-between items-center">
+          <h3 id="modalTitle" class="text-2xl font-bold text-gray-900 dark:text-white">Blog Post</h3>
+          <button id="closeModalBtn" class="text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 text-2xl leading-5">&times;</button>
+        </div>
+        <div id="modalContent" class="p-6 markdown-body text-gray-800 dark:text-gray-300"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= EXPERIENCE & CERTIFICATIONS ================= -->
+<section class="max-w-6xl mx-auto px-6 py-16">
+  <div class="grid md:grid-cols-2 gap-12">
+    <div>
+      <h3 class="text-2xl font-bold mb-5 flex items-center gap-2 text-gray-900 dark:text-white">💼 Work Experience</h3>
+      <div class="space-y-6">
+        <div class="border-l-4 border-indigo-400 pl-4">
+          <h4 class="work-title font-bold text-lg text-gray-900 dark:text-white">Web Application Developer (Capstone Lead)</h4>
+          <p class="work-company text-sm text-indigo-600 dark:text-indigo-400">Skin911 · Sep 2025 – Dec 2025</p>
+          <ul class="work-list list-disc list-inside text-gray-700 dark:text-gray-400 text-sm mt-2 space-y-1">
+            <li class="work-description">Built multi-branch booking + sales monitoring system using PHP/Laravel & MySQL.</li>
+            <li class="work-description">Implemented RBAC, authentication, and full data flow diagrams (Level 0-2).</li>
+            <li class="work-description">Leveraged AI-assisted tools for debugging and documentation.</li>
+          </ul>
+        </div>
+        <div class="border-l-4 border-gray-300 dark:border-gray-700 pl-4">
+          <h4 class="work-title font-bold text-lg text-gray-900 dark:text-white">Salesperson</h4>
+          <p class="work-company text-sm text-gray-500 dark:text-gray-500">Aurefine · Mar 2025 – May 2025</p>
+          <ul class="work-list list-disc list-inside text-gray-700 dark:text-gray-400 text-sm mt-2">
+            <li class="work-description">Developed client-facing communication, needs assessment, and objection handling — skills that enhance technical collaboration.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h3 class="text-2xl font-bold mb-5 flex items-center gap-2 text-gray-900 dark:text-white">🎓 Certifications & Training</h3>
+      <div class="space-y-3 bg-gray-50 dark:bg-gray-800/50 p-5 rounded-2xl border border-gray-100 dark:border-gray-700">
+        <div class="flex items-start gap-3"><span class="text-indigo-600 dark:text-indigo-400 text-xl">✓</span><div><span class="cert-title font-semibold text-gray-900 dark:text-white">AWS Cloud Quest: Cloud Practitioner</span><p class="cert-description text-sm text-gray-600 dark:text-gray-400">AWS Skill Builder — hands-on scenarios</p></div></div>
+        <div class="flex items-start gap-3"><span class="text-indigo-600 dark:text-indigo-400 text-xl">✓</span><div><span class="cert-title font-semibold text-gray-900 dark:text-white">SimuLearn AWS Training</span><p class="cert-description text-sm text-gray-600 dark:text-gray-400">Simulations & cloud architecture basics</p></div></div>
+        <div class="flex items-start gap-3"><span class="text-indigo-600 dark:text-indigo-400 text-xl">✓</span><div><span class="cert-title font-semibold text-gray-900 dark:text-white">Cisco Networking Basics</span><p class="cert-description text-sm text-gray-600 dark:text-gray-400">TCP/IP, subnetting, network fundamentals</p></div></div>
+        <div class="flex items-start gap-3"><span class="text-indigo-600 dark:text-indigo-400 text-xl">🎯</span><div><span class="cert-title font-semibold text-gray-900 dark:text-white">Working toward AWS Cloud Practitioner</span><p class="cert-description text-sm text-gray-600 dark:text-gray-400">Deepening cloud infrastructure & security</p></div></div>
+      </div>
+      <div class="mt-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-5 rounded-2xl">
+        <h4 class="font-bold text-gray-900 dark:text-white">🎓 Education</h4>
+        <p class="education-text text-gray-700 dark:text-gray-300">BS Information Technology, STI College Bacoor (2022–2026)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-8 transition-colors duration-300">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-gray-600 dark:text-gray-400 text-sm">
+      <p>© 2025 Leo Genodiala — Cloud & Web Developer Portfolio | Built with HTML/CSS/JS + Tailwind</p>
+      <div class="flex gap-5 mt-3 md:mt-0">
+        <a href="https://github.com/leogenodiala" target="_blank" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">GitHub</a>
+        <a href="https://www.linkedin.com/in/leogenodiala/" target="_blank" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">LinkedIn</a>
+        <a href="Leo_Genodiala_Resume.pdf" download class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Resume PDF</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- External JavaScript -->
+  <script src="js/script.js"></script>
+</body>
+</html>

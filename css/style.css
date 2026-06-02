@@ -1,0 +1,410 @@
+/* ================= BASE STYLES ================= */
+* {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  scroll-behavior: smooth;
+}
+
+/* ================= CARD & COMPONENT STYLES ================= */
+.card-hover { 
+  transition: transform 0.2s ease, box-shadow 0.2s ease; 
+}
+
+.card-hover:hover { 
+  transform: translateY(-5px); 
+  box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.15); 
+}
+
+.skill-badge { 
+  transition: all 0.2s; 
+}
+
+.skill-badge:hover { 
+  transform: scale(1.05); 
+}
+
+.blog-card { 
+  transition: all 0.2s ease; 
+  cursor: pointer; 
+}
+
+.blog-card:hover { 
+  border-left: 4px solid #3b82f6; 
+}
+
+.line-clamp-2 { 
+  display: -webkit-box; 
+  -webkit-line-clamp: 2; 
+  -webkit-box-orient: vertical; 
+  overflow: hidden; 
+}
+
+/* ================= THEME TOGGLE ================= */
+.theme-toggle {
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.05);
+}
+
+/* ================= NAME GRADIENT (Black to Gray) ================= */
+.name-gradient {
+  background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 50%, #6b7280 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Dark mode version ng name gradient (mas magaan na gray to white) */
+body.dark .name-gradient {
+  background: linear-gradient(135deg, #e5e7eb 0%, #9ca3af 50%, #d1d5db 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ================= SUBTITLE STYLES ================= */
+/* Light mode - black text */
+body.light .subtitle-text {
+  color: #1a1a1a !important;
+  font-weight: 500;
+}
+
+/* Dark mode - white text */
+body.dark .subtitle-text {
+  color: #e5e7eb !important;
+  font-weight: 500;
+}
+
+/* ================= SKILL BADGES - LIGHT MODE ================= */
+body.light .skill-badge {
+  background-color: #ffffff !important;
+  color: #1f2937 !important;
+  border: 1px solid #d1d5db !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+body.light .skill-badge:hover {
+  background-color: #f3f4f6 !important;
+  border-color: #9ca3af !important;
+}
+
+/* Dark mode skill badges */
+body.dark .skill-badge {
+  background-color: #334155 !important;
+  color: #e2e8f0 !important;
+  border: 1px solid #475569 !important;
+}
+
+body.dark .skill-badge:hover {
+  background-color: #475569 !important;
+}
+
+/* ================= WORK EXPERIENCE TEXT STYLES ================= */
+/* Light mode - lahat ng text sa work experience ay black */
+body.light .work-text,
+body.light .work-title,
+body.light .work-company,
+body.light .work-description,
+body.light .work-list li {
+  color: #1f2937 !important;
+}
+
+body.light .work-list li {
+  color: #374151 !important;
+}
+
+/* Dark mode - lahat ng text sa work experience ay white */
+body.dark .work-text,
+body.dark .work-title,
+body.dark .work-company,
+body.dark .work-description,
+body.dark .work-list li {
+  color: #e5e7eb !important;
+}
+
+body.dark .work-list li {
+  color: #cbd5e1 !important;
+}
+
+/* ================= EDUCATION TEXT STYLES ================= */
+body.light .education-text,
+body.light .education-school {
+  color: #1f2937 !important;
+}
+
+body.dark .education-text,
+body.dark .education-school {
+  color: #e5e7eb !important;
+}
+
+/* ================= CERTIFICATION TEXT STYLES ================= */
+body.light .cert-text,
+body.light .cert-title,
+body.light .cert-description {
+  color: #1f2937 !important;
+}
+
+body.dark .cert-text,
+body.dark .cert-title,
+body.dark .cert-description {
+  color: #e5e7eb !important;
+}
+
+/* ================= PROJECT DESCRIPTION TEXT ================= */
+body.light .project-description,
+body.light .project-title {
+  color: #1f2937 !important;
+}
+
+body.dark .project-description,
+body.dark .project-title {
+  color: #e5e7eb !important;
+}
+
+/* ================= BLOG TEXT STYLES ================= */
+body.light .blog-title,
+body.light .blog-excerpt,
+body.light .blog-date {
+  color: #1f2937 !important;
+}
+
+body.dark .blog-title,
+body.dark .blog-excerpt,
+body.dark .blog-date {
+  color: #e5e7eb !important;
+}
+
+/* ================= MARKDOWN STYLES ================= */
+.markdown-body p { 
+  margin-bottom: 1rem; 
+  line-height: 1.6; 
+}
+
+.markdown-body h3 { 
+  font-size: 1.35rem; 
+  font-weight: 700; 
+  margin-top: 1.5rem; 
+  margin-bottom: 0.5rem; 
+}
+
+.markdown-body pre { 
+  padding: 1rem; 
+  border-radius: 0.75rem; 
+  overflow-x: auto; 
+  margin: 1rem 0; 
+}
+
+.markdown-body code { 
+  padding: 0.2rem 0.4rem; 
+  border-radius: 0.375rem; 
+  font-size: 0.9rem; 
+}
+
+.markdown-body a { 
+  text-decoration: underline; 
+}
+
+/* ================= LIGHT MODE (MAIN) ================= */
+body.light {
+  background-color: #ffffff;
+  color: #111827;
+}
+
+/* Lahat ng text sa light mode ay magiging dark */
+body.light p:not(.subtitle-text):not(.skill-badge),
+body.light h1, body.light h2, body.light h3, body.light h4,
+body.light li, body.light span, body.light div:not(.skill-badge) {
+  color: #1f2937;
+}
+
+body.light .text-gray-500, 
+body.light .text-gray-400, 
+body.light .text-gray-600 { 
+  color: #374151 !important; 
+}
+
+body.light .text-gray-800, 
+body.light .text-gray-900 { 
+  color: #111827 !important; 
+}
+
+body.light .text-indigo-600 { 
+  color: #4f46e5 !important; 
+}
+
+body.light .bg-gray-50 { 
+  background-color: #f9fafb !important; 
+}
+
+body.light .bg-white { 
+  background-color: #ffffff !important; 
+}
+
+body.light .border-gray-100, 
+body.light .border-gray-200, 
+body.light .border-gray-300 { 
+  border-color: #e5e7eb !important; 
+}
+
+body.light .markdown-body code { 
+  background-color: #f3f4f6; 
+  color: #1f2937; 
+}
+
+body.light .markdown-body pre { 
+  background: #f1f5f9; 
+}
+
+body.light .markdown-body pre code { 
+  color: #0f172a; 
+}
+
+body.light .blog-card { 
+  background-color: #ffffff; 
+  border-color: #e5e7eb; 
+}
+
+body.light .blog-card:hover { 
+  background-color: #f9fafb; 
+}
+
+body.light footer.bg-white { 
+  background-color: #ffffff !important; 
+}
+
+body.light .bg-gradient-to-br.from-indigo-50 { 
+  background: linear-gradient(to bottom right, #eef2ff, #ffffff, #ecfeff) !important; 
+}
+
+/* Work experience section specific */
+body.light .border-l-4.border-indigo-400 h4,
+body.light .border-l-4.border-indigo-400 p,
+body.light .border-l-4.border-indigo-400 li,
+body.light .border-l-4.border-gray-300 h4,
+body.light .border-l-4.border-gray-300 p,
+body.light .border-l-4.border-gray-300 li {
+  color: #1f2937 !important;
+}
+
+/* Education section */
+body.light .bg-white.dark\:bg-gray-800 p,
+body.light .bg-white.dark\:bg-gray-800 h4 {
+  color: #1f2937 !important;
+}
+
+/* Certifications section */
+body.light .bg-gray-50.dark\:bg-gray-800\/50 .font-semibold,
+body.light .bg-gray-50.dark\:bg-gray-800\/50 p {
+  color: #1f2937 !important;
+}
+
+/* ================= DARK MODE (MAIN) ================= */
+body.dark {
+  background-color: #0f172a;
+  color: #f1f5f9;
+}
+
+/* Lahat ng text sa dark mode ay magiging light */
+body.dark p, body.dark h1, body.dark h2, body.dark h3, body.dark h4,
+body.dark li, body.dark span {
+  color: #f1f5f9;
+}
+
+body.dark .text-gray-500, 
+body.dark .text-gray-400, 
+body.dark .text-gray-600 { 
+  color: #cbd5e1 !important; 
+}
+
+body.dark .text-gray-800, 
+body.dark .text-gray-900 { 
+  color: #f1f5f9 !important; 
+}
+
+body.dark .text-indigo-600 { 
+  color: #818cf8 !important; 
+}
+
+body.dark .bg-white { 
+  background-color: #1e293b !important; 
+}
+
+body.dark .bg-gray-50 { 
+  background-color: #0f172a !important; 
+}
+
+body.dark .bg-gray-100 { 
+  background-color: #334155 !important; 
+}
+
+body.dark .border-gray-100, 
+body.dark .border-gray-200, 
+body.dark .border-gray-300 { 
+  border-color: #334155 !important; 
+}
+
+body.dark .markdown-body code { 
+  background-color: #334155; 
+  color: #f1f5f9; 
+}
+
+body.dark .markdown-body pre { 
+  background: #0f172a; 
+}
+
+body.dark .markdown-body pre code { 
+  color: #e2e8f0; 
+}
+
+body.dark .blog-card { 
+  background-color: #1e293b; 
+  border-color: #334155; 
+}
+
+body.dark .blog-card:hover { 
+  background-color: #334155; 
+}
+
+body.dark footer.bg-white { 
+  background-color: #1e293b !important; 
+}
+
+body.dark .bg-gradient-to-br.from-indigo-50 { 
+  background: #0f172a !important; 
+}
+
+body.dark .bg-gradient-to-br.to-cyan-50 { 
+  background: #0f172a !important; 
+}
+
+/* Work experience dark mode */
+body.dark .border-l-4.border-indigo-400 h4,
+body.dark .border-l-4.border-indigo-400 p,
+body.dark .border-l-4.border-indigo-400 li,
+body.dark .border-l-4.border-gray-300 h4,
+body.dark .border-l-4.border-gray-300 p,
+body.dark .border-l-4.border-gray-300 li {
+  color: #f1f5f9 !important;
+}
+
+/* Footer links */
+body.light footer a {
+  color: #4b5563 !important;
+}
+
+body.light footer a:hover {
+  color: #4f46e5 !important;
+}
+
+body.dark footer a {
+  color: #9ca3af !important;
+}
+
+body.dark footer a:hover {
+  color: #818cf8 !important;
+}
