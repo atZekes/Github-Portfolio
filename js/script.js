@@ -26,17 +26,17 @@ if (themeToggle) {
 }
 
 // ================= PROJECTS DATA =================
-// ================= PROJECTS DATA (with Tic-Tac-Toe Game) =================
+
 const PROJECTS = [
   {
-    title: "Multi-Branch Booking & Sales System",
+    title: "Skin911 Multi-Branch Booking & Sales System",
     description: "Complete capstone project for Skin911: multi-branch appointment scheduling, sales monitoring, RBAC, and data flow diagrams (Level 0-2).",
     tech: ["PHP/Laravel", "MySQL", "Bootstrap", "JS"],
     gradient: "from-slate-700 to-slate-800",
     icon: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z",
     iconLabel: "Laravel • PHP • MySQL",
     liveLink: "#",
-    githubLink: "#"
+    githubLink: "https://github.com/atZekes/Skinn911Capstone"
   },
   {
     title: "Cloud Quest: Serverless Dashboard",
@@ -66,7 +66,7 @@ const PROJECTS = [
     icon: "M4 4v16h16V4H4zm2 2h12v12H6V6zm3 3h2v6H9V9zm4 0h2v6h-2V9z",
     iconLabel: "HTML/CSS/JS • AWS S3",
     liveLink: "http://mystatic-website111.s3-website-ap-southeast-2.amazonaws.com/",
-    githubLink: "#"
+    
   },
   {
     title: "Static Portfolio & Markdown Blog",
