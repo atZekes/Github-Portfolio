@@ -6,7 +6,7 @@
 
 A modern, responsive personal portfolio website showcasing my journey as a Cloud Practitioner and Full-Stack Web Developer. Features a **light/dark mode toggle**, **Markdown-powered blog**, and fully customizable sections.
 
-![Portfolio Screenshot](https://via.placeholder.com/1200x600?text=Portfolio+Screenshot+Placeholder)
+
 
 ## ✨ Features
 
