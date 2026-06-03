@@ -27,16 +27,17 @@ if (themeToggle) {
 
 // ================= PROJECTS DATA =================
 
+// ================= PROJECTS DATA (with AXIOM E-Commerce) =================
 const PROJECTS = [
   {
-    title: "Skin911 Multi-Branch Booking & Sales System",
+    title: "Multi-Branch Booking & Sales System",
     description: "Complete capstone project for Skin911: multi-branch appointment scheduling, sales monitoring, RBAC, and data flow diagrams (Level 0-2).",
     tech: ["PHP/Laravel", "MySQL", "Bootstrap", "JS"],
     gradient: "from-slate-700 to-slate-800",
     icon: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z",
     iconLabel: "Laravel • PHP • MySQL",
     liveLink: "#",
-    githubLink: "https://github.com/atZekes/Skinn911Capstone"
+    githubLink: "#"
   },
   {
     title: "Cloud Quest: Serverless Dashboard",
@@ -59,6 +60,16 @@ const PROJECTS = [
     githubLink: "https://github.com/atzekes/AWSSystemStatusDashboard"
   },
   {
+    title: "AXIOM — Premium Tech E-Commerce",
+    description: "Luxury tech e-commerce platform featuring premium products, smooth cart system, filterable product grid, and responsive design. Fully deployed on AWS S3 with custom domain ready.",
+    tech: ["HTML5", "CSS3", "JavaScript", "AWS S3", "E-Commerce"],
+    gradient: "from-amber-700 to-yellow-600",
+    icon: "M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1.5 6M17 13l1.5 6M9 21h6M12 18v3",
+    iconLabel: "Premium E-Commerce • AWS S3",
+    liveLink: "http://axiomecommerce.s3-website-ap-southeast-2.amazonaws.com/",
+    
+  },
+  {
     title: "Tic-Tac-Toe Game",
     description: "Classic Tic-Tac-Toe game with AI opponent mode, score tracking, and smooth animations. Built with pure HTML, CSS, and JavaScript. Deployed on AWS S3.",
     tech: ["HTML5", "CSS3", "JavaScript", "AWS S3"],
@@ -68,26 +79,7 @@ const PROJECTS = [
     liveLink: "http://mystatic-website111.s3-website-ap-southeast-2.amazonaws.com/",
     
   },
-  {
-    title: "Static Portfolio & Markdown Blog",
-    description: "Responsive personal site with blog powered by Markdown + marked.js. Showcases modern frontend skills, deployed via GitHub Pages — pure static, zero backend.",
-    tech: ["Tailwind CSS", "JavaScript", "Markdown"],
-    gradient: "from-indigo-500 to-purple-600",
-    icon: "M4 6h16M4 10h16M4 14h16M4 18h16",
-    iconLabel: "HTML/CSS/JS + Tailwind",
-    liveLink: "#",
-    githubLink: "#"
-  },
-  {
-    title: "E-Commerce Platform (Coming Soon)",
-    description: "Full-featured e-commerce platform with cart, checkout, payment integration, and admin dashboard. Currently in development.",
-    tech: ["React", "Node.js", "MongoDB", "Stripe"],
-    gradient: "from-orange-500 to-red-500",
-    icon: "M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1.5 6M17 13l1.5 6M9 21h6M12 18v3",
-    iconLabel: "MERN Stack",
-    liveLink: "#",
-    githubLink: "#"
-  },
+  
   {
     title: "Task Management API (Coming Soon)",
     description: "RESTful API for task management with JWT authentication, task sharing, and real-time updates.",
@@ -110,6 +102,13 @@ const BLOG_POSTS = [
     markdown: `## Learning AWS the right way\n\nInstead of just theory, I dove into **AWS Cloud Quest** and **SimuLearn** — role-playing scenarios that require building real architectures.\n\n### Key takeaways:\n- **Lambda & API Gateway**: Built a serverless ticketing system.\n- **S3 + CloudFront**: Static hosting with edge caching.\n- **IAM policies**: Least privilege principle in practice.\n\nNext step: take the AWS Cloud Practitioner exam and then Solutions Architect Associate.`
   },
   {
+    id: "deploy-ecommerce-aws-s3",
+    title: "🛍️ Deploying a Premium E-Commerce Site on AWS S3",
+    excerpt: "How I built and deployed a luxury tech e-commerce platform (AXIOM) on AWS S3 with zero backend costs.",
+    date: "Mar 2026",
+    markdown: `## Building AXIOM E-Commerce on AWS S3\n\nI built a complete luxury tech e-commerce website (AXIOM) featuring premium products, a functional cart system, and smooth animations — all hosted on AWS S3 for pennies per month.\n\n### Why AWS S3 for E-Commerce?\n\nFor a fully static e-commerce site (no user accounts, no payments on-site), S3 is perfect:\n\n**Cost**: ~$0.50/month for storage and transfer\n**Performance**: Global edge network with CloudFront\n**Reliability**: 99.999999999% durability\n**Security**: Built-in HTTPS and bucket policies\n\n### How I Built It:\n\n**Frontend Architecture:**\n- Product catalog with filtering by category (Audio, Computing, Mobile)\n- Shopping cart system using localStorage\n- Smooth animations and custom cursor\n- Responsive design for all devices\n- Newsletter signup mock\n\n**AWS S3 Setup:**\n\`\`\`bash\n# 1. Create S3 bucket with unique name\naws s3 mb s3://axiomecommerce --region ap-southeast-2\n\n# 2. Enable static website hosting\naws s3 website s3://axiomecommerce --index-document index.html --error-document 404.html\n\n# 3. Set bucket policy for public read\naws s3api put-bucket-policy --bucket axiomecommerce --policy file://policy.json\n\`\`\`\n\n**Bucket Policy:**\n\`\`\`json\n{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [{\n    \"Effect\": \"Allow\",\n    \"Principal\": \"*\",\n    \"Action\": \"s3:GetObject\",\n    \"Resource\": \"arn:aws:s3:::axiomecommerce/*\"\n  }]\n}\n\`\`\`\n\n### Features Implemented:\n\n✅ Product catalog with 8+ premium products\n✅ Category filtering (Audio, Computing, Mobile)\n✅ Shopping cart with quantity management\n✅ Featured product section\n✅ Client testimonials\n✅ Newsletter subscription (mock)\n✅ Custom cursor and luxury aesthetic\n✅ Fully responsive design\n\n### Challenges & Solutions:\n\n**Challenge 1: Cart Persistence**\n- *Solution*: Used localStorage to save cart between page refreshes\n\n**Challenge 2: Product Images**\n- *Solution*: Optimized all images to WebP format for faster loading\n\n**Challenge 3: S3 Caching**\n- *Solution*: Set proper Cache-Control headers for assets\n\n### Deployment Process:\n\n\`\`\`bash\n# Sync local files to S3\naws s3 sync ./ s3://axiomecommerce --exclude \".git/*\" --exclude \"*.md\"\n\n# Set cache headers for static assets\naws s3 cp --recursive ./ s3://axiomecommerce --exclude \"*.html\" --cache-control \"max-age=31536000\"\n\n# Invalidate CloudFront (if using)\naws cloudfront create-invalidation --distribution-id XYZ --paths \"/*\"\n\`\`\`\n\n### Live Demo:\nhttp://axiomecommerce.s3-website-ap-southeast-2.amazonaws.com/\n\n### Lessons Learned:\n1. S3 is perfect for static e-commerce (catalog-only sites)\n2. localStorage is sufficient for cart without backend\n3. CloudFront dramatically improves global load times\n4. Always set proper CORS if using custom fonts\n5. Use environment variables for API keys (even in static sites)\n\n### Future Enhancements:\n- [ ] Add Stripe Checkout integration\n- [ ] Implement user accounts with AWS Cognito\n- [ ] Add product search functionality\n- [ ] Connect to a headless CMS for product management\n- [ ] Add email notifications for \"orders\"\n\nThis project proves that you can build a premium e-commerce experience without expensive backend infrastructure!`
+  },
+  {
     id: "laravel-multi-branch-system",
     title: "🏢 Building a Multi-Branch Booking System with Laravel",
     excerpt: "How we architected RBAC, branch-based appointments, and sales monitoring for Skin911.",
@@ -121,7 +120,7 @@ const BLOG_POSTS = [
     title: "🚀 Deploying Static Websites on AWS S3",
     excerpt: "Step-by-step guide to host your static website on AWS S3 bucket with public access and custom domain.",
     date: "Mar 2026",
-    markdown: `## Hosting Static Websites on AWS S3\n\nAmazon S3 (Simple Storage Service) isn't just for file storage — it can also host static websites! This is perfect for portfolios, blogs, and frontend apps.\n\n### Step-by-Step Guide:\n\n**1. Create an S3 Bucket**\n- Go to AWS Console → S3 → Create bucket\n- Bucket name must be unique globally\n- Choose region closest to your audience (ap-southeast-2 for Sydney)\n- Uncheck \"Block all public access\" (we need public access for website hosting)\n\n**2. Enable Static Website Hosting**\n- Go to bucket → Properties → Static website hosting\n- Enable: \"Host a static website\"\n- Index document: \`index.html\`\n- Error document: \`404.html\` (optional)\n\n**3. Set Bucket Permissions**\n- Go to Permissions → Bucket Policy\n- Add this policy to make files publicly readable:\n\n\`\`\`json\n{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Effect\": \"Allow\",\n      \"Principal\": \"*\",\n      \"Action\": \"s3:GetObject\",\n      \"Resource\": \"arn:aws:s3:::YOUR-BUCKET-NAME/*\"\n    }\n  ]\n}\n\`\`\`\n\n**4. Upload Your Files**\n- Upload \`index.html\`, \`style.css\`, \`script.js\`, and any assets\n- Make sure files are publicly readable\n\n**5. Access Your Website**\n- Your website URL: \`http://YOUR-BUCKET-NAME.s3-website-REGION.amazonaws.com/\`\n- Example: \`http://mystatic-website111.s3-website-ap-southeast-2.amazonaws.com/\`\n\n### Cost Analysis:\n- **S3 Storage**: $0.023 per GB/month (first 50GB free)\n- **Data Transfer**: $0.09 per GB (first 100GB free)\n- **Total monthly cost**: ~$0.50 for low-traffic portfolio\n\n### Advantages:\n- ✅ Extremely cheap (pennies per month)\n- ✅ Scales automatically\n- ✅ High availability (99.999999999% durability)\n- ✅ No server management\n- ✅ CDN ready (CloudFront)\n\n### Limitations:\n- ❌ No backend/APIs\n- ❌ No server-side code\n- ❌ Must re-upload for updates\n\n### Pro Tips:\n- Enable CloudFront for faster global delivery\n- Use GitHub Actions to auto-deploy on push\n- Add custom domain via Route 53\n- Enable versioning for rollbacks\n\nThis is how I deployed my Tic-Tac-Toe game and other static projects!`
+    markdown: `## Hosting Static Websites on AWS S3\n\nAmazon S3 (Simple Storage Service) isn't just for file storage — it can also host static websites! This is perfect for portfolios, blogs, and frontend apps.\n\n### Step-by-Step Guide:\n\n**1. Create an S3 Bucket**\n- Go to AWS Console → S3 → Create bucket\n- Bucket name must be unique globally\n- Choose region closest to your audience (ap-southeast-2 for Sydney)\n- Uncheck \"Block all public access\" (we need public access for website hosting)\n\n**2. Enable Static Website Hosting**\n- Go to bucket → Properties → Static website hosting\n- Enable: \"Host a static website\"\n- Index document: \`index.html\`\n- Error document: \`404.html\` (optional)\n\n**3. Set Bucket Permissions**\n- Go to Permissions → Bucket Policy\n- Add this policy to make files publicly readable:\n\n\`\`\`json\n{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Effect\": \"Allow\",\n      \"Principal\": \"*\",\n      \"Action\": \"s3:GetObject\",\n      \"Resource\": \"arn:aws:s3:::YOUR-BUCKET-NAME/*\"\n    }\n  ]\n}\n\`\`\`\n\n**4. Upload Your Files**\n- Upload \`index.html\`, \`style.css\`, \`script.js\`, and any assets\n- Make sure files are publicly readable\n\n**5. Access Your Website**\n- Your website URL: \`http://YOUR-BUCKET-NAME.s3-website-REGION.amazonaws.com/\`\n\n### Cost Analysis:\n- **S3 Storage**: $0.023 per GB/month (first 50GB free)\n- **Data Transfer**: $0.09 per GB (first 100GB free)\n- **Total monthly cost**: ~$0.50 for low-traffic portfolio\n\n### Advantages:\n- ✅ Extremely cheap (pennies per month)\n- ✅ Scales automatically\n- ✅ High availability (99.999999999% durability)\n- ✅ No server management\n- ✅ CDN ready (CloudFront)\n\nThis is how I deployed my Tic-Tac-Toe game and AXIOM e-commerce site!`
   },
   {
     id: "static-markdown-portfolio",
