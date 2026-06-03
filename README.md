@@ -20,6 +20,10 @@ A modern, responsive personal portfolio website showcasing my journey as a Cloud
 
 ## 🛠️ Technologies Used
 
+Screenshot of porfolio
+![alt text](image.png)
+
+
 ### Frontend
 - **HTML5** - Semantic markup
 - **CSS3** - Custom styling with Tailwind CSS

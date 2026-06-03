@@ -39,16 +39,7 @@ const PROJECTS = [
     liveLink: "#",
     githubLink: "#"
   },
-  {
-    title: "Cloud Quest: Serverless Dashboard",
-    description: "Hands-on AWS simulation: built event-driven notifications, used Lambda + DynamoDB, practiced IAM roles — part of AWS Skill Builder journey.",
-    tech: ["Python", "AWS CLI", "CloudWatch"],
-    gradient: "from-cyan-800 to-indigo-700",
-    icon: "M19.5 10.5c0 1.5-.75 2.25-2.25 2.25h-4.5c-1.5 0-2.25-.75-2.25-2.25V6c0-1.5.75-2.25 2.25-2.25h4.5c1.5 0 2.25.75 2.25 2.25v4.5zM9 10.5c0 1.5-.75 2.25-2.25 2.25h-4.5C.75 12.75 0 12 0 10.5V6c0-1.5.75-2.25 2.25-2.25h4.5c1.5 0 2.25.75 2.25 2.25v4.5z",
-    iconLabel: "AWS Lambda • S3 • EC2",
-    liveLink: "#",
-    githubLink: "#"
-  },
+
   {
     title: "System Status Dashboard",
     description: "AWS service monitoring dashboard with real-time updates, incident timeline, region filtering, email/SMS alerts, and SLA tracking. Monitors 8+ AWS services across 3 regions.",
@@ -59,6 +50,7 @@ const PROJECTS = [
     liveLink: "https://atzekes.github.io/AWSSystemStatusDashboard/",
     githubLink: "https://github.com/atzekes/AWSSystemStatusDashboard"
   },
+
   {
     title: "AXIOM — Premium Tech E-Commerce",
     description: "Luxury tech e-commerce platform featuring premium products, smooth cart system, filterable product grid, and responsive design. Fully deployed on AWS S3 with custom domain ready.",
@@ -69,6 +61,7 @@ const PROJECTS = [
     liveLink: "http://axiomecommerce.s3-website-ap-southeast-2.amazonaws.com/",
     
   },
+  
   {
     title: "Tic-Tac-Toe Game",
     description: "Classic Tic-Tac-Toe game with AI opponent mode, score tracking, and smooth animations. Built with pure HTML, CSS, and JavaScript. Deployed on AWS S3.",
