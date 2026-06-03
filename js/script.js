@@ -26,6 +26,7 @@ if (themeToggle) {
 }
 
 // ================= PROJECTS DATA =================
+// ================= PROJECTS DATA (with Tic-Tac-Toe Game) =================
 const PROJECTS = [
   {
     title: "Multi-Branch Booking & Sales System",
@@ -56,6 +57,16 @@ const PROJECTS = [
     iconLabel: "Cloud Monitoring • Real-time",
     liveLink: "https://atzekes.github.io/AWSSystemStatusDashboard/",
     githubLink: "https://github.com/atzekes/AWSSystemStatusDashboard"
+  },
+  {
+    title: "Tic-Tac-Toe Game",
+    description: "Classic Tic-Tac-Toe game with AI opponent mode, score tracking, and smooth animations. Built with pure HTML, CSS, and JavaScript. Deployed on AWS S3.",
+    tech: ["HTML5", "CSS3", "JavaScript", "AWS S3"],
+    gradient: "from-purple-600 to-pink-600",
+    icon: "M4 4v16h16V4H4zm2 2h12v12H6V6zm3 3h2v6H9V9zm4 0h2v6h-2V9z",
+    iconLabel: "HTML/CSS/JS • AWS S3",
+    liveLink: "http://mystatic-website111.s3-website-ap-southeast-2.amazonaws.com/",
+    githubLink: "#"
   },
   {
     title: "Static Portfolio & Markdown Blog",
@@ -104,6 +115,13 @@ const BLOG_POSTS = [
     excerpt: "How we architected RBAC, branch-based appointments, and sales monitoring for Skin911.",
     date: "Dec 2025",
     markdown: `## Laravel in production-like capstone\n\nThe system supported 4 branches, real-time booking validation, and role dashboards (admin, branch manager, staff).\n\n### Technical highlights:\n- **Database Design**: normalized tables for branches, services, bookings, sales logs.\n- **Authentication**: Laravel Breeze with custom guards.\n- **Frontend**: Bootstrap + vanilla JS for dynamic branch selection.\n\nWe delivered full documentation (DFD Level 0-2) and the client praised usability.`
+  },
+  {
+    id: "deploy-static-website-aws-s3",
+    title: "🚀 Deploying Static Websites on AWS S3",
+    excerpt: "Step-by-step guide to host your static website on AWS S3 bucket with public access and custom domain.",
+    date: "Mar 2026",
+    markdown: `## Hosting Static Websites on AWS S3\n\nAmazon S3 (Simple Storage Service) isn't just for file storage — it can also host static websites! This is perfect for portfolios, blogs, and frontend apps.\n\n### Step-by-Step Guide:\n\n**1. Create an S3 Bucket**\n- Go to AWS Console → S3 → Create bucket\n- Bucket name must be unique globally\n- Choose region closest to your audience (ap-southeast-2 for Sydney)\n- Uncheck \"Block all public access\" (we need public access for website hosting)\n\n**2. Enable Static Website Hosting**\n- Go to bucket → Properties → Static website hosting\n- Enable: \"Host a static website\"\n- Index document: \`index.html\`\n- Error document: \`404.html\` (optional)\n\n**3. Set Bucket Permissions**\n- Go to Permissions → Bucket Policy\n- Add this policy to make files publicly readable:\n\n\`\`\`json\n{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Effect\": \"Allow\",\n      \"Principal\": \"*\",\n      \"Action\": \"s3:GetObject\",\n      \"Resource\": \"arn:aws:s3:::YOUR-BUCKET-NAME/*\"\n    }\n  ]\n}\n\`\`\`\n\n**4. Upload Your Files**\n- Upload \`index.html\`, \`style.css\`, \`script.js\`, and any assets\n- Make sure files are publicly readable\n\n**5. Access Your Website**\n- Your website URL: \`http://YOUR-BUCKET-NAME.s3-website-REGION.amazonaws.com/\`\n- Example: \`http://mystatic-website111.s3-website-ap-southeast-2.amazonaws.com/\`\n\n### Cost Analysis:\n- **S3 Storage**: $0.023 per GB/month (first 50GB free)\n- **Data Transfer**: $0.09 per GB (first 100GB free)\n- **Total monthly cost**: ~$0.50 for low-traffic portfolio\n\n### Advantages:\n- ✅ Extremely cheap (pennies per month)\n- ✅ Scales automatically\n- ✅ High availability (99.999999999% durability)\n- ✅ No server management\n- ✅ CDN ready (CloudFront)\n\n### Limitations:\n- ❌ No backend/APIs\n- ❌ No server-side code\n- ❌ Must re-upload for updates\n\n### Pro Tips:\n- Enable CloudFront for faster global delivery\n- Use GitHub Actions to auto-deploy on push\n- Add custom domain via Route 53\n- Enable versioning for rollbacks\n\nThis is how I deployed my Tic-Tac-Toe game and other static projects!`
   },
   {
     id: "static-markdown-portfolio",
